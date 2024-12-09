@@ -39,6 +39,19 @@ function triggerPauseAll() {
   });
 }
 
+async function getPageTitle() {
+  let titleScript = `
+    (function() {
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      return ogTitle ? ogTitle.getAttribute('content') : document.title;
+    })();
+  `;
+  let results = await browser.tabs.executeScript({
+    code: titleScript,
+  });
+  return results[0];
+}
+
 browser.browserAction.onClicked.addListener(async tab => {
   try {
     let results = await browser.tabs.executeScript({
@@ -49,17 +62,13 @@ browser.browserAction.onClicked.addListener(async tab => {
 
     let videos = results.reduce((acc, v) => (acc = [...acc, ...v]), []);
     if (videos.length === 1) {
-      let pageTitle = await browser.tabs.executeScript({
-        code: 'document.title',
-      });
-      triggerIntent(videos[0].src, pageTitle[0]);
+      let pageTitle = await getPageTitle();
+      triggerIntent(videos[0].src, pageTitle);
     } else {
       let playingVideos = videos.filter(v => !v.paused);
       if (playingVideos.length === 1) {
-        let pageTitle = await browser.tabs.executeScript({
-          code: 'document.title',
-        });
-        triggerIntent(playingVideos[0].src, pageTitle[0]);
+        let pageTitle = await getPageTitle();
+        triggerIntent(playingVideos[0].src, pageTitle);
       }
     }
   } catch (err) {
