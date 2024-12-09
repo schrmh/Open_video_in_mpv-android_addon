@@ -26,6 +26,7 @@ web-ext build
 ```
 
 (You might need to enable debug menu by tapping Firefox logo in "About Firefox" multiple times to be able to install this)  
+(Fuck Mozilla... Icecraven allows the user to open about:config and then to set xpinstall.signatures.required to false)  
 
 # TODO
 - Set badge to show number of links or streaming site name when a link is detected  
