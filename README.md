@@ -19,6 +19,14 @@ Then:
 web-ext run --target=firefox-android
 ```
 
+When satisfied build the installable zip:
+
+```
+web-ext build
+```
+
+(You might need to enable debug menu by tapping Firefox logo in "About Firefox" multiple times to be able to install this)  
+
 # TODO
 - Set badge to show number of links or streaming site name when a link is detected  
 - Support more streaming sites (e.g. send-to-mpv supports more but doesn't work on Android)
