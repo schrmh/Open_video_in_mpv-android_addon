@@ -1,7 +1,7 @@
 // Add a context menu action on every image element in the page.
 // browser.contextMenus.create({
-//   id: 'play-externally-plus',
-//   title: '▶ video intent',
+//   id: 'play-externally-mpv',
+//   title: '▶ mpv intent',
 //   contexts: ['video'],
 // });
 
