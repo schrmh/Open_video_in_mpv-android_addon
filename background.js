@@ -6,7 +6,7 @@
 // });
 
 let findVideos = `
-  Array.from(document.querySelectorAll('video')).map(v => 
+  Array.from(document.querySelectorAll('video')).map(v =>
     ({ src: v.src || v.currentSrc, paused: v.paused })
   );`;
 
@@ -19,12 +19,13 @@ let pauseVideos = `
     v.load();
   });`;
 
-function triggerIntent(videoUrl) {
+function triggerIntent(videoUrl, pageTitle) {
   let [scheme, url] = videoUrl.split('://');
   let intentOpts = [
-    'action=android.intent.action.VIEW',
-    'scheme=' + scheme,
     'type=video/*',
+    'package=is.xyz.mpv',
+    'scheme=' + scheme,
+    'S.title=' + encodeURIComponent(pageTitle),
   ];
   browser.tabs.create({
     url: `intent://${url}#Intent;${intentOpts.join(';')};end`,
@@ -45,14 +46,20 @@ browser.browserAction.onClicked.addListener(async tab => {
       code: findVideos,
     });
     await triggerPauseAll();
-    
+
     let videos = results.reduce((acc, v) => (acc = [...acc, ...v]), []);
     if (videos.length === 1) {
-      triggerIntent(videos[0].src);
+      let pageTitle = await browser.tabs.executeScript({
+        code: 'document.title',
+      });
+      triggerIntent(videos[0].src, pageTitle[0]);
     } else {
       let playingVideos = videos.filter(v => !v.paused);
       if (playingVideos.length === 1) {
-        triggerIntent(playingVideos[0].src);
+        let pageTitle = await browser.tabs.executeScript({
+          code: 'document.title',
+        });
+        triggerIntent(playingVideos[0].src, pageTitle[0]);
       }
     }
   } catch (err) {
