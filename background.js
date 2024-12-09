@@ -1,7 +1,7 @@
 // Add a context menu action on every image element in the page.
 // browser.contextMenus.create({
-//   id: 'play-externally',
-//   title: 'Play video externally',
+//   id: 'play-externally-plus',
+//   title: '▶ video intent',
 //   contexts: ['video'],
 // });
 

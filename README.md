@@ -1,4 +1,4 @@
-# External video player addon
+# External video player+ addon
 
 Open any video with your favorite Android video player! Thanks to this extension you will be able to open online videos with any native video player like VLC, MxPlayer, etc.
 

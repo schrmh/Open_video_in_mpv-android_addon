@@ -1,13 +1,13 @@
 {
 
   "manifest_version": 2,
-  "name": "External Video Player",
+  "name": "External Video Player+",
   "version": "2.0.1",
   "description": "Open HTML5 videos on Android with any video player like VLC, MxPlayer, etc.",
 
   "applications": {
     "gecko": {
-      "id": "android.external.player@albertogasparin.it"
+      "id": "android.external.player.plus@derberg"
     }
   },
 
@@ -18,7 +18,7 @@
 
   "browser_action": {
     "default_icon": "external-video-player.svg",
-    "default_title": "Play video externally"
+    "default_title": "▶ video intent"
   },
 
   "background" : {
